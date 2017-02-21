@@ -1,0 +1,19 @@
+---
+- name: Set hostname in cluster
+  template: src=hostname.j2 dest=/etc/hosts
+
+- name: Add hostname fqdn 
+  template: src=hosts.j2 dest=/etc/hosts
+
+- name: Turn off iptables
+  command: /etc/init.d/iptables stop
+
+- name: Stop iptables
+  command: chkconfig iptables off
+
+- name: be sure ntp is installed
+  yum: name=ntp state=installed
+
+- name: be sure ntpd is running and enabled
+  service: name=ntpd state=started enabled=yes
+

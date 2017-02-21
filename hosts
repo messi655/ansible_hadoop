@@ -1,0 +1,9 @@
+[all]
+ambari.tin.local ansible_ssh_host=192.168.1.55
+namenode.tin.local ansible_ssh_host=192.168.1.67
+datanode.tin.local ansible_ssh_host=192.168.1.57
+
+
+[cluster]
+namenode.tin.local ansible_ssh_host=192.168.1.67
+datanode.tin.local ansible_ssh_host=192.168.1.57
