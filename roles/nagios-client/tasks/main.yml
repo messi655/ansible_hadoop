@@ -1,0 +1,45 @@
+---
+# install and setup NRPE and checks
+
+- name: Check Operating System
+  fail:
+    msg="You're not running a supported operating system (CentOS or RHEL 7+)"
+  when: ((ansible_os_family != "RedHat") or (ansible_distribution_major_version|int < 7))
+
+- name: Import EPEL GPG Key
+  rpm_key: key=https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+    state=present
+
+- name: Check for EPEL repo
+  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    state=present
+
+- name: Install NRPE and Common Plugins
+  yum: name={{ item }} state=present
+  become: true
+  with_items:
+    - nrpe
+    - nagios-plugins-load
+    - nagios-plugins-nrpe
+    - nagios-plugins-uptime
+    - nagios-plugins-swap
+    - nagios-plugins-procs
+    - nagios-plugins-users
+    - nagios-plugins-disk
+    - nagios-plugins-tcp
+    - libsemanage-python
+
+- name: Setup NRPE client configuration
+  template:
+    src=nrpe.cfg.j2
+    dest=/etc/nagios/nrpe.cfg
+  register: nrpe_needs_restart
+
+- name: Start NRPE service
+  command: systemctl restart nrpe.service
+  ignore_errors: true
+  when: nrpe_needs_restart != 0
+
+- name: Set NRPE to start on boot
+  command: systemctl enable nrpe.service
+  ignore_errors: true

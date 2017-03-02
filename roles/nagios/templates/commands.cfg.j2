@@ -1,0 +1,7 @@
+
+#### Define NRPE command here, you need to have this for external host checks #####
+define command {
+	command_name                   check_nrpe
+	command_line                   /usr/lib64/nagios/plugins/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
+}
+

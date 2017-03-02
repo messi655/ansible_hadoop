@@ -1,0 +1,6 @@
+---
+- name: Update ambari repository
+  copy: src=ambari.repo dest=/etc/yum.repos.d/ambari.repo
+
+- name: Update hdp repository
+  copy: src= hdp.repo dest=/etc/yum.repos.d/hdp.repo

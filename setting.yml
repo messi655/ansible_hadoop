@@ -1,8 +1,38 @@
 ---
-#- hosts: all
-#  roles:
-#    - {role: common}
+- hosts: all
+  roles:
+    - {role: common}
 
-- hosts: cluster
+#####################
+# role for nagios clients via NRPE
+#- hosts: all
+#  sudo: yes
+#  roles:
+#    - {role: nagios-client}
+
+# role for nagios server
+#- hosts: server
+#  sudo: yes
+#  roles:
+#    - {role: nagios}
+
+###################
+- hosts: ntp_config_server
+  roles:
+    - {role: ntp}
+
+- hosts: all
+  roles:
+    - {role: ntp-client}
+
+###################
+- host: all
+  roles:
+    - {role: hdp}
+
+######## Set this at last
+- hosts: all
   roles:
     - {role: java}
+
+

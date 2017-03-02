@@ -1,19 +1,18 @@
 ---
-- name: Set hostname in cluster
-  template: src=hostname.j2 dest=/etc/hosts
+- name: Set hostname for individual host
+  template: src=hostname.j2 dest=/etc/hostname
 
 - name: Add hostname fqdn 
   template: src=hosts.j2 dest=/etc/hosts
 
-- name: Turn off iptables
-  command: /etc/init.d/iptables stop
+# tasks for ansible-disable-selinux
+- name: Install libselinux as prereq for selinux ansible module
+  yum: name=libselinux-python state=present
 
-- name: Stop iptables
-  command: chkconfig iptables off
+- name: Disable SELinux at next reboot
+  selinux: state=disabled
 
-- name: be sure ntp is installed
-  yum: name=ntp state=installed
-
-- name: be sure ntpd is running and enabled
-  service: name=ntpd state=started enabled=yes
+- name: Set SELinux in permissive mode until the machine is rebooted
+  shell: setenforce 0
+  ignore_errors: True
 
