@@ -8,6 +8,9 @@
 - name: Add hostname fqdn 
   template: src=hosts.j2 dest=/etc/hosts
 
+- name: Increase Max limit open files
+  copy: src=limits.conf dest=/etc/security/limits.conf
+
 # tasks for ansible-disable-selinux
 - name: Install libselinux as prereq for selinux ansible module
   yum: name=libselinux-python state=present
