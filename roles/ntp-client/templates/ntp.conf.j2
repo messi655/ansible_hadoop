@@ -23,8 +23,8 @@ restrict ::1
 #server 2.centos.pool.ntp.org iburst
 #server 3.centos.pool.ntp.org iburst
 
-{% for server in groups[ntp_config_server] %}
-{{ hostvars[host]['ansible_default_ipv4']['address'] }}
+{% for host in groups['ntp_config_server'] %}
+server {{ hostvars[host]['ansible_default_ipv4']['address'] }}
 {% endfor %}
 
 #broadcast 192.168.1.255 autokey        # broadcast server
