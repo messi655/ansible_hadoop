@@ -5,9 +5,5 @@ datanode01 ansible_ssh_host=172.31.30.90
 datanode02 ansible_ssh_host=172.31.19.92
 
 
-[cluster]
-namenode.tin.local ansible_ssh_host=192.168.1.67
-datanode.tin.local ansible_ssh_host=192.168.1.57
-
 [ntp_config_server]
 namenode01 ansible_ssh_host=172.31.27.4
