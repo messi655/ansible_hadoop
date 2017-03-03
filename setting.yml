@@ -11,7 +11,7 @@
   roles:
     - {role: ntp}
 
-- hosts: all
+- hosts: ntp_client
   sudo: yes
   roles:
     - {role: ntp-client}

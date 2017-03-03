@@ -7,3 +7,8 @@ datanode02 ansible_ssh_host=172.31.19.92
 
 [ntp_config_server]
 namenode01 ansible_ssh_host=172.31.27.4
+
+[ntp_client]
+namenode02 ansible_ssh_host=172.31.23.238
+datanode01 ansible_ssh_host=172.31.30.90
+datanode02 ansible_ssh_host=172.31.19.92
