@@ -1,25 +1,30 @@
 ---
 ################## Disable firewall, selinux, set and add hostname
 - hosts: all
+  sudo: yes
   roles:
     - {role: common}
 
 ################### Config NTP
 - hosts: ntp_config_server
+  sudo: yes
   roles:
     - {role: ntp}
 
 - hosts: all
+  sudo: yes
   roles:
     - {role: ntp-client}
 
 ################### Update repository
 - host: all
+  sudo: yes
   roles:
     - {role: hdp}
 
 ######## Install Java
 - hosts: all
+  sudo: yes
   roles:
     - {role: java}
 
@@ -39,6 +44,7 @@
 
 ######## Reboot host
 #- hosts: all
+#  sudo: yes
 #  roles:
 #    - {role: reboot}
 
