@@ -17,7 +17,7 @@
     - {role: ntp-client}
 
 ################### Update repository
-- host: all
+- hosts: all
   sudo: yes
   roles:
     - {role: hdp}
