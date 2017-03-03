@@ -9,7 +9,7 @@
   template: src=hosts.j2 dest=/etc/hosts
 
 - name: Disabled firewalld
-  service: name=firewalld state=disabled
+  service: name=firewalld state=stopped enabled=no
 
 # tasks for ansible-disable-selinux
 - name: Install libselinux as prereq for selinux ansible module
