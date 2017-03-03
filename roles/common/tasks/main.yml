@@ -5,6 +5,9 @@
 - name: Add hostname fqdn 
   template: src=hosts.j2 dest=/etc/hosts
 
+- name: Disabled firewalld
+  service: name=firewalld state=disabled
+
 # tasks for ansible-disable-selinux
 - name: Install libselinux as prereq for selinux ansible module
   yum: name=libselinux-python state=present
