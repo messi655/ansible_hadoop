@@ -7,5 +7,12 @@
   notify:
          - restart ntp
 
-- name: be sure ntpd is running and enabled
-  service: name=ntpd state=started enabled=yes
+- name: Diable chronyd
+  service: name=chronyd enabled=no
+
+- name: Enable ntp
+  systemd: state=started name=ntpd
+
+
+- name: Be sure ntpd is running and enabled
+  service: name=ntpd state=running enabled=yes
